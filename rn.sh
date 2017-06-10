@@ -1,9 +1,9 @@
 #!/bin/bash
 #https://facebook.github.io/react-native/docs/getting-started.html
-tmp="/tmp"
-so="$(uname)"
+tmp="$(mktemp -d)"
+so="$(uname | tr '[:upper:]' '[:lower:]')"
 
-if [ ! "$so" = "Linux" ] && [ ! "$so" = "Darwin" ]; then
+if [ ! "$so" = "linux" ] && [ ! "$so" = "darwin" ]; then
     echo "Desculpe, sistema não suportado."
     exit 0
 fi
@@ -11,11 +11,8 @@ fi
 #if [ -z "$(which npm 2>/dev/null)" ]; then
 echo "Baixando node e npm."
 cd "${tmp:?}"
-if [ "$so" = "Linux" ]; then
-    curl -L -# https://nodejs.org/dist/v6.11.0/node-v6.11.0-linux-x64.tar.xz -o node.tar.xz
-else
-    curl -L -# https://nodejs.org/dist/v6.11.0/node-v6.11.0-darwin-x64.tar.xz -o node.tar.xz
-fi
+link="https://nodejs.org/dist/v6.11.0/node-v6.11.0-"$so"-x64.tar.xz"
+curl -L -# "$link" -o node.tar.xz
 tar -Jxf node.tar.xz
 rm -rf "${HOME:?}"/.node4ns "${HOME:?}"/.npm
 mv "${tmp:?}"/node*/ "$HOME"/.node4ns
@@ -26,7 +23,7 @@ source $HOME/.noderc
 
 #fi
 
-if [ "$so" = "Darwin" ]; then #configuracao adicional para mac
+if [ "$so" = "darwin" ]; then #configuracao adicional para mac
     touch $HOME/.bash_profile
     if ( ! grep -q [.]bashrc "$HOME/.bash_profile" );then
         echo 'source '$HOME'/.bashrc' >> $HOME/.bash_profile
@@ -38,8 +35,11 @@ echo 'Instalando React Native.'
 npm install -g react-native-cli
 #fi
 
-if [ "$so" = "Linux" ] && [ -z "$ANDROID_HOME" ] && [ ! -e "$HOME/Android" ]; then
+if [ "$so" = "linux" ] && [ -z "$ANDROID_HOME" ]; then
     echo "Instalando Android SDK"
+    cd "${tmp:?}"
     git clone https://github.com/wison27/noroot-android && cd noroot-android && bash ./android.sh sdk
+    cd "${tmp:?}"
+    rm -rf noroot-android
 fi
 echo "Tudo pronto!"
