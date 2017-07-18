@@ -38,7 +38,7 @@ npm install -g react-native-cli
 if [ "$so" = "linux" ] && [ -z "$ANDROID_HOME" ]; then
     echo "Instalando Android SDK"
     cd "${tmp:?}"
-    git clone https://github.com/wison27/noroot-android && cd noroot-android && bash ./android.sh sdk
+    git clone https://github.com/wison27/noroot-android && cd noroot-android && bash ./android.sh sdk jdk
     cd "${tmp:?}"
     rm -rf noroot-android
 fi
