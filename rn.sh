@@ -30,15 +30,15 @@ if [ "$so" = "darwin" ]; then #configuracao adicional para mac
     fi
 fi
 
-#if [ -z "$(which react-native 2>/dev/null)" ]; then
-echo 'Instalando React Native.'
-npm install -g react-native-cli
-#fi
+if [ -z "$(which react-native 2>/dev/null)" ]; then
+    echo 'Instalando React Native.'
+    npm install -g react-native-cli
+fi
 
 if [ "$so" = "linux" ] && [ -z "$ANDROID_HOME" ]; then
     echo "Instalando Android SDK"
     cd "${tmp:?}"
-    git clone https://github.com/wison27/noroot-android && cd noroot-android && bash ./android.sh sdk jdk
+    git clone https://github.com/wison27/noroot-android && cd noroot-android && bash ./android.sh sdk
     cd "${tmp:?}"
     rm -rf noroot-android
 fi
