@@ -1,9 +1,9 @@
-# RNScript (Linux, macOS)
-Instala React-Native, nodejs e npm.
+# noroot React Native (Linux, macOS)
+Instala React-Native, nodejs e npm sem precisar de root.
 
 ### Uso
 <pre>
-curl -L 'https://raw.githubusercontent.com/wison27/RNScript/master/rn.sh' | bash
+curl -L 'https://raw.githubusercontent.com/wison27/noroot-rn/master/rn.sh' | bash
 </pre>
 
 ### Linux
