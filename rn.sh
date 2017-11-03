@@ -4,14 +4,15 @@ tmp="$(mktemp -d)"
 so="$(uname | tr '[:upper:]' '[:lower:]')"
 
 if [ ! "$so" = "linux" ] && [ ! "$so" = "darwin" ]; then
-    echo "Desculpe, sistema não suportado."
+    echo "Desculpe, sistema não suportado (no momento apenas Linux e macOS)."
     exit 0
 fi
 
 #if [ -z "$(which npm 2>/dev/null)" ]; then
-echo "Baixando node e npm."
+version="v8.9.0"
+echo "Baixando node $version e npm."
 cd "${tmp:?}"
-link="https://nodejs.org/dist/v6.11.0/node-v6.11.0-"$so"-x64.tar.xz"
+link="https://nodejs.org/dist/$version/node-$version-"$so"-x64.tar.xz"
 curl -L -# "$link" -o node.tar.xz
 tar -Jxf node.tar.xz
 rm -rf "${HOME:?}"/.node4ns "${HOME:?}"/.npm
