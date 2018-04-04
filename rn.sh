@@ -16,7 +16,7 @@ version="v"$(echo $a | sed -e 's/.*Version: <strong>\([^<]*\)<.*/\1/')
 echo 'Encontrado node '$version' para download.'
 
 
-if [ "$FORCE_NODE" = "1" ] || [ -z "$(which npm 2>/dev/null)" ] || (( $(node --version | sed "s/v\(.\).*/\1/") > ${version:1:1} )); then
+if [ "$FORCE_NODE" = "1" ] || [ -z "$(which npm 2>/dev/null)" ] || (( $(node --version | sed "s/v\(.\).*/\1/") < ${version:1:1} )); then
     echo "Baixando ..."
     cd "${tmp:?}"
     link="$site_node/dist/$version/node-$version-"$so"-x64.tar.xz"
