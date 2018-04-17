@@ -10,6 +10,7 @@ fi
 cd "${tmp:?}"
 git clone https://github.com/wison27/noroot-node && cd noroot-node && bash node.sh
 rm -rf "${tmp:?}"/noroot-node
+source $HOME/.noderc
 
 if [ -z "$(which react-native 2>/dev/null)" ]; then
     echo 'Instalando React Native.'
@@ -30,3 +31,4 @@ if [ "$so" = "linux" ] && [ -z "$ANDROID_HOME" ]; then
     rm -rf noroot-android
 fi
 echo "Tudo pronto!"
+exec -l bash
