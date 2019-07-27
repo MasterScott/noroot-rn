@@ -7,7 +7,7 @@ if [ "$(id -u)" = "0" ];then
     exit 0 #essa linha
 fi
 
-curl -L 'https://raw.githubusercontent.com/wison27/noroot-node/master/node.sh' | bash
+curl -L 'https://raw.githubusercontent.com/morkin1792/noroot-node/master/node.sh' | bash
 source $HOME/.norootrc
 
 if [ -z "$(which react-native 2>/dev/null)" ] || [ -z "$(which create-react-native-app 2>/dev/null)" ]; then
